@@ -1,0 +1,134 @@
+<wxs module="utils">
+  var join = function(a, b) {
+    return a + b
+  };
+  var isNotSlot = function(v) {
+    return typeof v !== 'string'
+  }
+  module.exports = {
+    join: join,
+    isNotSlot: isNotSlot
+  }
+</wxs>
+<view class="weui-actionsheet {{show ? 'weui-actionsheet_toggle' : ''}} {{extClass}}">
+    <view class="finish" catchtap="closeKeyBoardTap">完成</view>
+    <!-- 标题 -->
+    <view class="vehicle-panel" style="height:450rpx;bottom:{{bottom}}">
+        <!-- 数字键盘 -->
+        <view class="number-panel-box" wx:if="{{keyBoardType == 2}}">
+            <view class="number-panel-row">
+                <view class='number-panel-row-key vehicle-hover' bindtap='vehicleTap' wx:for="{{keyPhone}}" data-value="{{item}}" key="{{item}}">
+                    {{item}}
+                </view>
+                <view catchlongtap="longPressDelete" catchtap='vehicleTap' data-value="delete" class='number-panel-row-button vehicle-hover'>
+                    <!-- <image catchlongtap="longPressDelete" catchtap='vehicleTap' data-value="delete" src='./delete.png' class='vehicle-en-button-delete' mode='aspectFit'>删除</image> -->
+                    <yy-icon name='jp-del' size="32" color="#333" class='vehicle-en-button-delete' catchlongtap="longPressDelete" catchtap='vehicleTap' data-value="delete"></yy-icon>
+                </view>
+            </view>
+        </view>
+        <!-- 英文键盘 -->
+        <view class="letter-panel-box" wx:if="{{keyBoardType == 1}}">
+            <view class="vehicle-panel-row">
+                <view class='vehicle-panel-row-button vehicle-panel-row-button-number vehicle-hover' bindtap='vehicleTap' wx:key="index" wx:for="{{keyNumber}}" data-value="{{item}}" key="{{item}}">
+                    {{item}}
+                </view>
+            </view>
+            <view class="vehicle-panel-row">
+                <view class='vehicle-panel-row-button vehicle-hover' wx:key="index" wx:for="{{keyEnInput1}}" bindtap='vehicleTap' data-value="{{item}}" key="{{item}}">
+                    {{item}}
+                </view>
+            </view>
+            <view class="vehicle-panel-row">
+                <view class='vehicle-panel-row-button vehicle-hover' wx:key="index" wx:for="{{keyEnInput2}}" bindtap='vehicleTap' data-value="{{item}}" key="{{item}}">
+                    {{item}}
+                </view>
+                <view catchlongtap="longPressDelete" catchtap='vehicleTap' data-value="delete" class='vehicle-panel-row-button vehicle-panel-row-button-img vehicle-hover'>
+                    <!-- <image src='./delete.png' class='vehicle-en-button-delete' catchlongtap="longPressDelete" catchtap='vehicleTap' data-value="delete" mode='aspectFit'>删除</image> -->
+                    <yy-icon name='jp-del' size="32" color="#333" class='vehicle-en-button-delete' catchlongtap="longPressDelete" catchtap='vehicleTap' data-value="delete"></yy-icon>
+                </view>
+            </view>
+            <view class="vehicle-panel-row-last">
+                <view class='vehicle-panel-row-button vehicle-panel-row-button-last vehicle-hover' bindtap='vehicleTap' wx:key="index" wx:for="{{keyEnInput3}}" data-value="{{item}}" key="{{item}}">
+                    {{item}}
+                </view>
+                <view class='vehicle-panel-row-button vehicle-panel-ok' bindtap='vehicleTap' data-value="ok">
+                    确认
+                </view>
+            </view>
+        </view>
+        <!-- 车牌键盘 -->
+        <view class="letter-panel-box" wx:if="{{keyBoardType == 3}}">
+            <view class="vehicle-panel-row">
+                <view class='vehicle-panel-row-button vehicle-panel-row-button-number vehicle-hover' bindtap='vehicleTap' wx:key="index" wx:for="{{keyNumber}}" data-value="{{item}}" key="{{item}}">
+                    {{item}}
+                </view>
+            </view>
+            <view class="vehicle-panel-row">
+                <view class='vehicle-panel-row-button vehicle-hover' wx:key="index" wx:for="{{keyEnInput1}}" bindtap='vehicleTap' data-value="{{item}}" key="{{item}}">
+                    {{item}}
+                </view>
+            </view>
+            <view class="vehicle-panel-row" style="justify-content: center">
+                <view class='vehicle-panel-row-button vehicle-hover' wx:key="index" wx:for="{{keyEnInput2}}" bindtap='vehicleTap' data-value="{{item}}" key="{{item}}">
+                    {{item}}
+                </view>
+            </view>
+            <view class="vehicle-panel-row-card-last">
+                <view catchtap='switchType' data-value="delete" class='vehicle-panel-row-card-button vehicle-hover vehicle-panel-row-button-img vehicle-panel-card-switch'>
+                    中文
+                </view>
+                <view class='vehicle-panel-row-button vehicle-panel-row-button-last vehicle-hover' wx:key="index" bindtap='vehicleTap' wx:for="{{keyEnInput3}}" data-value="{{item}}" key="{{item}}">
+                    {{item}}
+                </view>
+                <view catchlongtap="longPressDelete" catchtap='vehicleTap' data-value="delete" class='vehicle-panel-row-card-button vehicle-panel-row-button-img vehicle-hover vehicle-panel-card-delete'>
+                    <!-- <image src='./delete.png' mode='aspectFit'>删除</image> -->
+                    <yy-icon name='jp-del' size="32" color="#333" class='vehicle-en-button-delete' catchlongtap="longPressDelete" catchtap='vehicleTap' data-value="delete"></yy-icon>
+                </view>
+            </view>
+        </view>
+        <!-- 车牌中文 -->
+        <view class="letter-panel-box" wx:if="{{keyBoardType == 4}}">
+            <view class="vehicle-panel-row">
+                <view class='vehicle-panel-row-button vehicle-panel-row-button-number vehicle-hover' bindtap='vehicleTap' wx:key="index" wx:for="{{carCard0}}" data-value="{{item}}" key="{{item}}">
+                    {{item}}
+                </view>
+            </view>
+            <view class="vehicle-panel-row">
+                <view class='vehicle-panel-row-button vehicle-hover' wx:key="index" wx:for="{{carCard1}}" bindtap='vehicleTap' data-value="{{item}}" key="{{item}}">
+                    {{item}}
+                </view>
+            </view>
+            <view class="vehicle-panel-row" style="justify-content: center">
+                <view class='vehicle-panel-row-button vehicle-hover' wx:key="index" wx:for="{{carCard2}}" bindtap='vehicleTap' data-value="{{item}}" key="{{item}}">
+                    {{item}}
+                </view>
+            </view>
+            <view class="vehicle-panel-row-card-last">
+                <view catchtap='switchType' data-value="switch" class='vehicle-panel-row-card-button vehicle-hover vehicle-panel-row-button-img vehicle-panel-card-switch'>
+                    ABC
+                </view>
+                <view class='vehicle-panel-row-button vehicle-panel-row-button-last vehicle-hover' bindtap='vehicleTap' wx:key="index" wx:for="{{carCard3}}" data-value="{{item}}" key="{{item}}">
+                    {{item}}
+                </view>
+                <view catchlongtap="longPressDelete" catchtap='vehicleTap' data-value="delete" class='vehicle-panel-row-card-button vehicle-panel-row-button-img vehicle-hover vehicle-panel-card-delete'>
+                    <!-- <image src='./delete.png' class='vehicle-en-button-delete' catchlongtap="longPressDelete" catchtap='vehicleTap' data-value="delete" mode='aspectFit'>删除</image> -->
+                    <yy-icon name='jp-del' size="32" color="#333" class='vehicle-en-button-delete' catchlongtap="longPressDelete" catchtap='vehicleTap' data-value="delete"></yy-icon>
+                </view>
+            </view>
+        </view>
+        <!-- 十六进制键盘 -->
+        <view class="number-panel-box" wx:if="{{keyBoardType == 5}}">
+            <view class="number-panel-hex-row">
+                <view class='number-panel-row-hex-key vehicle-hover' bindtap='vehicleTap' wx:for="{{hexNumber}}" data-value="{{item}}" key="{{item}}">
+                    {{item}}
+                </view>
+                <view catchlongtap="longPressDelete" catchtap='vehicleTap' data-value="delete" class='number-panel-row-hex-button vehicle-hover'>
+                    <!-- <image catchlongtap="longPressDelete" catchtap='vehicleTap' data-value="delete" src='../../images/delete.png' class='vehicle-en-button-delete' mode='aspectFit'>删除</image> -->
+                    删除
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 适配iPhoneX的底条 -->
+    <view class="adaptive" wx:if="{{isAdaptive}}"></view>
+</view>

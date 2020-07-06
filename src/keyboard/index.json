@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "yy-icon": "../icon/index"
+    }
+}

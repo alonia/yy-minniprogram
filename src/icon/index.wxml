@@ -1,0 +1,4 @@
+<wxs src="../wxs/utils.wxs" module="utils" />
+<view class="{{ classPrefix }} {{ isImageName ? 'yy-icon--image' : classPrefix + '-' + name }} yyiconfont" style="color: {{ color }};font-size: {{ utils.addUnit(size) }};{{ customStyle }}">
+    <image wx:if="{{ isImageName }}" src="{{ name }}" mode="aspectFit" class="yy-icon__image" />
+</view>
